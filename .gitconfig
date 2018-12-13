@@ -1,0 +1,12 @@
+[alias]
+	branch-name = "!git rev-parse --abbrev-ref HEAD"
+
+	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+
+	co = "!f() { git checkout ${1}; git pull; }; f"
+
+	gpsup = !git push --set-upstream origin $(git branch-name)
+
+	hotfix-start  = "!f(){ b=$1; git checkout $2; git fetch; git rebase; git checkout -b "$b" $2; };f"
+
+	hotfix-finish = "!f(){ b=$(git branch-name); git checkout $1; git branch -d "$b"; git pull; };f"
